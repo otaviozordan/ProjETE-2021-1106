@@ -102,9 +102,23 @@ void loop() {
     recive = Serial.readString();
   }
 
-  if(recive == "SetHigh"){ //Para fazer a leitura - SetHigh 
+switch (recive) {
+    
+  case SetHigh: //Para medir altura vazia
     leituraT();
-  }
+    leituraF();
+    break;
+    
+  case valor2:
+    // comando(s)
+    break;
+    
+    
+  default:
+    // comando(s)
+    break;
+}
+
 
   Serial.println(recive);
 }
