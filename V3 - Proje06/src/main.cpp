@@ -1,8 +1,8 @@
 //Projeto: V3 - Projete
 //Autor: Otávio Zordan
 
-/*Debug :
-SetHigh - Para fazer a leitura de carga vazia */
+// Debug :
+// SetHigh - Para fazer a leitura de carga vazia 
 
 
 #include <Arduino.h>
@@ -12,9 +12,9 @@ LiquidCrystal lcd(12, 13, 7, 6, 5, 4); // Pinagem do LCD
 
 String recive;
 
+long hif, hit;
 
-//******* Leitura *********************************
-//Para leitura:
+// Para leitura: *********************************
 const int echoPin1 = 9;
 const int trigPin1 = 10;
 
@@ -23,7 +23,6 @@ const int trigPin2 = 12;
 
 long duration1 ,distanceT;
 long duration2 ,distanceF;
-
 
 void leituraT(){ //Leitura traseira
 
@@ -90,25 +89,37 @@ void leituraF(){ //Leitura frontal
 
 void setup()
 {
+  pinMode(trigPin1, OUTPUT); //Define os pinos do ultrassonico 1
+  pinMode(echoPin1, INPUT);
+
+  pinMode(trigPin2, OUTPUT); //Define os pinos do ultrassonico 2
+  pinMode(echoPin2, INPUT);
+
   Serial.begin(9600); //Inicia monito serial
   lcd.begin(16, 2); // Inicia o lcd de 16x2
-
 
 }
 
 void loop() {
 
-  if(Serial.available()){ //Realiza a importação de comandos de debug pelo serial
-    recive = Serial.readString();
+  if(Serial.available()){  //Verifica a chegada de algo pela serial
+    recive = Serial.readString(); //Realiza a importação de comandos de debug pelo serial
   }
     
   if(recive == "SetHigh"){ //Para fazer a leitura - SetHigh 
     leituraT();
     leituraF();
+    hif = distanceF;
+    hit = distanceT;
+  }
+ 
+  if(recive == "Calibrate"){
+
   }
 
-
+  Serial.println("");
   Serial.println(recive);
-  Serial.println(distanceF);
-  Serial.println(distanceT);
+  Serial.println(hif);
+  Serial.println(hit);
+  Serial.println("");
 }
