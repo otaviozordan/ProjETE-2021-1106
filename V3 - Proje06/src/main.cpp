@@ -104,8 +104,11 @@ void loop() {
     
   if(recive == "SetHigh"){ //Para fazer a leitura - SetHigh 
     leituraT();
+    leituraF();
   }
 
 
   Serial.println(recive);
+  Serial.println(distanceF);
+  Serial.println(distanceT);
 }
