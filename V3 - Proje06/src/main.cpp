@@ -7,6 +7,7 @@
 
 #include <Arduino.h>
 #include <LiquidCrystal.h> // Adiciona a biblioteca "LiquidCrystal" ao projeto
+#include <Stepper.h> //Adiciona a biblioteca do Motor ao projeto
 
 LiquidCrystal lcd(12, 13, 7, 6, 5, 4); // Pinagem do LCD
 
@@ -130,10 +131,11 @@ void loop() {
     Serial.print(hit);
     Serial.println(" para T");
 
-    delay(500);
+    delay(200);
   }
  
-  if(recive == "Calibrate"){
+  if(recive == "Calibrate"){ 
+    
 
   }
 
