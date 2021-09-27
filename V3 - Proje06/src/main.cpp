@@ -4,7 +4,6 @@
 // Debug :
 // SetHigh - Para fazer a leitura de carga vazia 
 
-
 #include <Arduino.h>
 #include <LiquidCrystal.h> // Adiciona a biblioteca "LiquidCrystal" ao projeto
 
@@ -49,7 +48,7 @@ void leituraT(){ //Leitura traseira
   duration1 = pulseIn (echoPin1, HIGH);
 
   distanceT = duration1/58.2;
-  Serial.println(distanceT);
+  //Serial.println(distanceT);
   delay(50);
 
 }
@@ -79,7 +78,7 @@ void leituraF(){ //Leitura frontal
   duration2 = pulseIn (echoPin2, HIGH);
 
   distanceF = duration1/58.2;
-  Serial.println(distanceF);
+  //Serial.println(distanceF);
   delay(50);
 
 }
@@ -108,15 +107,29 @@ void loop() {
   }
     
   if(recive == "SetHigh"){ //Para fazer a leitura - SetHigh 
+    Serial.println("Iniciando SetHigh");
+    lcd.setCursor(0,5);
+    lcd.print("Start");
+    lcd.setCursor(1,4);
+    lcd.print("SetHigh");
+
     leituraT();
     leituraF();
     hif = distanceF;
     hit = distanceT;
-    Serial.println("As distancias definidas como padrão foram: ");
-    Serial.println(hif);
-    Serial.print(" para F");
-    Serial.println(hit);
-    Serial.print(" para T");
+
+    lcd.setCursor(0,0);
+    lcd.print(hif);
+    lcd.setCursor(1,0);
+    lcd.print(hit);
+
+    Serial.println("As distancias definidas como padrao foram: ");
+    Serial.print(hif);
+    Serial.println(" para F");
+    Serial.print(hit);
+    Serial.println(" para T");
+
+    delay(500);
   }
  
   if(recive == "Calibrate"){
