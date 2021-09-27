@@ -1,5 +1,6 @@
 //Projeto: V3 - Projete
-//Autor: Otávio Zordan
+//Autor Inicial: Otávio Zordan
+//Colaboradores: 
 
 // Debug :
 // SetHigh - Para fazer a leitura de carga vazia 
