@@ -104,6 +104,7 @@ void loop() {
 
   if(Serial.available()){  //Verifica a chegada de algo pela serial
     recive = Serial.readString(); //Realiza a importação de comandos de debug pelo serial
+    Serial.println(recive);
   }
     
   if(recive == "SetHigh"){ //Para fazer a leitura - SetHigh 
@@ -111,15 +112,15 @@ void loop() {
     leituraF();
     hif = distanceF;
     hit = distanceT;
+    Serial.println("As distancias definidas como padrão foram: ");
+    Serial.println(hif);
+    Serial.print(" para F");
+    Serial.println(hit);
+    Serial.print(" para T");
   }
  
   if(recive == "Calibrate"){
 
   }
 
-  Serial.println("");
-  Serial.println(recive);
-  Serial.println(hif);
-  Serial.println(hit);
-  Serial.println("");
 }
