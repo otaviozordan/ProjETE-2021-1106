@@ -101,23 +101,10 @@ void loop() {
   if(Serial.available()){ //Realiza a importação de comandos de debug pelo serial
     recive = Serial.readString();
   }
-
-switch (recive) {
     
-  case SetHigh: //Para medir altura vazia
+  if(recive == "SetHigh"){ //Para fazer a leitura - SetHigh 
     leituraT();
-    leituraF();
-    break;
-    
-  case valor2:
-    // comando(s)
-    break;
-    
-    
-  default:
-    // comando(s)
-    break;
-}
+  }
 
 
   Serial.println(recive);
