@@ -192,6 +192,7 @@ void loop() {
     lcd.setCursor(3, 0);
     lcd.print("Calibrado");
     delay(400);
+    lcd.clear();
     recive = "";
   }
 }
