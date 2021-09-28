@@ -10,9 +10,9 @@ LiquidCrystal lcd(12, 11, 5, 4, 3, 2); // Pinagem do LCD
 
 String recive;
 
-long hif, hit;
-long hmf, hmt;
-long diff, dift, dif;
+float hif, hit;
+float hmf, hmt;
+float diff, dift, dif;
 float lh;
 
 // Para leitura: *********************************
@@ -22,8 +22,8 @@ const int trigPin1 = 6;
 const int echoPin2 = 9;
 const int trigPin2 = 8;
 
-long duration1 ,distanceT;
-long duration2 ,distanceF;
+float duration1 ,distanceT;
+float duration2 ,distanceF;
 
 void leituraT(){ //Leitura traseira
 
@@ -89,6 +89,7 @@ void loop() {
     lcd.print("Start");
     lcd.setCursor(4,1);
     lcd.print("SetHigh");
+    delay(400);
 
     leituraT();
     leituraF();
@@ -133,6 +134,8 @@ void loop() {
     lcd.print("Start");
     lcd.setCursor(3,1);
     lcd.print("Calibrate");
+    delay(500);
+    lcd.clear();
 
     leituraT();
     leituraF();
@@ -142,6 +145,15 @@ void loop() {
     diff = hif-hmf;
     dift = hit-hmt;
     dif = diff-dift;
+
+    lcd.setCursor(0,0);
+    lcd.print("Comprecao de");
+    lcd.setCursor(0,1);
+    lcd.print(dif);
+    delay(500);
+    lcd.clear();
+    lcd.setCursor(3, 0);
+    lcd.print("Calibrado");
 
     slaveBoard.print("dif");
     slaveBoard.print(dif);
