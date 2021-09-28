@@ -152,14 +152,25 @@ void loop() {
     lcd.print(dif);
     delay(500);
     lcd.clear();
-    lcd.setCursor(3, 0);
-    lcd.print("Calibrado");
+
+    Serial.println("Diferenca traseira de: ");
+    Serial.print(dift);
+
+    Serial.println("Diferenca frontal de: ");
+    Serial.print(diff);   
+
+    Serial.println("Diferenca entre eixos de: ");
+    Serial.print(dif);
 
     slaveBoard.print("dif");
     slaveBoard.print(dif);
 
     slaveBoard.print("lh");
     slaveBoard.print(lh);
+
+    lcd.setCursor(3, 0);
+    lcd.print("Calibrado");
+    delay(400);
     recive = "";
   }
 }
