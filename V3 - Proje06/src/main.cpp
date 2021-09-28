@@ -17,6 +17,7 @@ String recive;
 long hif, hit;
 long hmf, hmt;
 long diff, dift, dif;
+float lh;
 
 // Para leitura: *********************************
 const int echoPin1 = 9;
@@ -40,19 +41,6 @@ void leituraT(){ //Leitura traseira
   duration1 = pulseIn (echoPin1, HIGH);
 
   distanceT = duration1/97.7;
-  Serial.println(distanceT);
-  delay(50);
-
-  digitalWrite(trigPin1, LOW);
-  delayMicroseconds(2);
-
-  digitalWrite(trigPin1, HIGH);
-  delayMicroseconds(10);
-
-  digitalWrite(trigPin1, LOW);
-  duration1 = pulseIn (echoPin1, HIGH);
-
-  distanceT = duration1/58.2;
   //Serial.println(distanceT);
   delay(50);
 
@@ -69,20 +57,7 @@ void leituraF(){ //Leitura frontal
   digitalWrite(trigPin2, LOW);
   duration2 = pulseIn (echoPin2, HIGH);
 
-  distanceF = duration1/97.7;
-  Serial.println(distanceF);
-  delay(50);
-
-  digitalWrite(trigPin2, LOW);
-  delayMicroseconds(2);
-
-  digitalWrite(trigPin2, HIGH);
-  delayMicroseconds(10);
-
-  digitalWrite(trigPin2, LOW);
-  duration2 = pulseIn (echoPin2, HIGH);
-
-  distanceF = duration1/58.2;
+  distanceF = duration2/97.7;
   //Serial.println(distanceF);
   delay(50);
 
@@ -138,6 +113,16 @@ void loop() {
     recive = "";
   }
  
+  if (recive == "Lhigh") {
+
+    if(Serial.available()){  //Verifica a chegada de algo pela serial
+     lh = Serial.read(); //Realiza a importação de comandos de debug pelo serial
+      Serial.println("Recebemos o valor de:");
+      Serial.println(lh);
+    }
+    recive = "";
+  }
+  
   if(recive == "Calibrate"){ 
     Serial.println("Iniciando Calibrate");
     lcd.setCursor(0,5);
@@ -156,5 +141,6 @@ void loop() {
 
     recive = "";
   }
+
 
 }
