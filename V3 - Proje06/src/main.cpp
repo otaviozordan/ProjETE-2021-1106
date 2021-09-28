@@ -5,8 +5,8 @@
 #include <LiquidCrystal.h> //Adiciona a biblioteca "LiquidCrystal" ao projeto
 #include <SoftwareSerial.h> //Para comunicação entre arduinos
 
-SoftwareSerial slaveBoard (2, 3); //Informa a conexão com slave
-LiquidCrystal lcd(12, 13, 7, 6, 5, 4); // Pinagem do LCD
+SoftwareSerial slaveBoard (10, 13); //Informa a conexão com slave
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2); // Pinagem do LCD
 
 String recive;
 
@@ -16,11 +16,11 @@ long diff, dift, dif;
 float lh;
 
 // Para leitura: *********************************
-const int echoPin1 = 9;
-const int trigPin1 = 10;
+const int echoPin1 = 7;
+const int trigPin1 = 6;
 
-const int echoPin2 = 11;
-const int trigPin2 = 12;
+const int echoPin2 = 9;
+const int trigPin2 = 8;
 
 long duration1 ,distanceT;
 long duration2 ,distanceF;
