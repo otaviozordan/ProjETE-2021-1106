@@ -7,9 +7,10 @@
 
 #include <Arduino.h>
 #include <LiquidCrystal.h> // Adiciona a biblioteca "LiquidCrystal" ao projeto
-#include <Stepper.h> //Adiciona a biblioteca do Motor ao projeto
+#include <Stepper.h> //Adiciona a biblioteca do Motor ao projeto 
 
 LiquidCrystal lcd(12, 13, 7, 6, 5, 4); // Pinagem do LCD
+Stepper mymotor;
 
 String recive;
 
