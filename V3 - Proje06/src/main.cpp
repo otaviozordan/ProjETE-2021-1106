@@ -66,8 +66,7 @@ void leituraF(){ //Leitura frontal
 //****************************************************
 
 
-void setup()
-{
+void setup(){
   pinMode(trigPin1, OUTPUT); //Define os pinos do ultrassonico 1
   pinMode(echoPin1, INPUT);
 
@@ -75,6 +74,7 @@ void setup()
   pinMode(echoPin2, INPUT);
 
   Serial.begin(9600); //Inicia monito serial
+  slaveBoard.begin(9600); //Inicia a comunicação com o slave
   lcd.begin(16, 2); // Inicia o lcd de 16x2
 
 }
@@ -113,14 +113,19 @@ void loop() {
     recive = "";
   }
  
-  if (recive == "Lhigh") {
-
+  if (recive == "LHigh") {
     if(Serial.available()){  //Verifica a chegada de algo pela serial
-     lh = Serial.read(); //Realiza a importação de comandos de debug pelo serial
+      lh = Serial.read();
+
+      lcd.setCursor(0,5);
+      lcd.print("LHigh");
+      lcd.setCursor(1,4);
+      lcd.print(lh);
+
       Serial.println("Recebemos o valor de:");
       Serial.println(lh);
+      recive = "";
     }
-    recive = "";
   }
   
   if(recive == "Calibrate"){ 
