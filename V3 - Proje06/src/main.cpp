@@ -79,15 +79,15 @@ void loop() {
 
   if(Serial.available()){  //Verifica a chegada de algo pela serial
     recive = Serial.readString(); //Realiza a importação de comandos de debug pelo serial
-    Serial.println("Recebido");
-    Serial.println(recive);
+    Serial.println("Comando recebido");
   }
     
   if(recive == "SetHigh"){ //Para fazer a leitura - SetHigh 
     Serial.println("Iniciando SetHigh");
-    lcd.setCursor(0,5);
+
+    lcd.setCursor(5,0);
     lcd.print("Start");
-    lcd.setCursor(1,4);
+    lcd.setCursor(4,1);
     lcd.print("SetHigh");
 
     leituraT();
@@ -95,9 +95,10 @@ void loop() {
     hif = distanceF;
     hit = distanceT;
 
+    lcd.clear();
     lcd.setCursor(0,0);
     lcd.print(hif);
-    lcd.setCursor(1,0);
+    lcd.setCursor(0,1);
     lcd.print(hit);
 
     Serial.println("As distancias definidas como padrao foram: ");
@@ -106,7 +107,8 @@ void loop() {
     Serial.print(hit);
     Serial.println(" para T");
 
-    delay(200);
+    delay(800);
+    lcd.clear();
     recive = "";
   }
  
@@ -114,9 +116,9 @@ void loop() {
     if(Serial.available()){  //Verifica a chegada de algo pela serial
       lh = Serial.read();
 
-      lcd.setCursor(0,5);
+      lcd.setCursor(5,0);
       lcd.print("LHigh");
-      lcd.setCursor(1,4);
+      lcd.setCursor(4,1);
       lcd.print(lh);
 
       Serial.println("Recebemos o valor de:");
@@ -127,9 +129,9 @@ void loop() {
   
   if(recive == "Calibrate"){ 
     Serial.println("Iniciando Calibrate");
-    lcd.setCursor(0,5);
+    lcd.setCursor(5,0);
     lcd.print("Start");
-    lcd.setCursor(1,3);
+    lcd.setCursor(3,1);
     lcd.print("Calibrate");
 
     leituraT();
