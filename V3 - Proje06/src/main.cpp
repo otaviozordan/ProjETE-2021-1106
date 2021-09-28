@@ -7,14 +7,16 @@
 
 #include <Arduino.h>
 #include <LiquidCrystal.h> // Adiciona a biblioteca "LiquidCrystal" ao projeto
-#include <Stepper.h> //Adiciona a biblioteca do Motor ao projeto 
+#include <SoftwareSerial.h> //Para comunicação entre arduinos
 
+SoftwareSerial slaveBoard (2, 3); //Informa a conexão com slave
 LiquidCrystal lcd(12, 13, 7, 6, 5, 4); // Pinagem do LCD
-Stepper mymotor;
 
 String recive;
 
 long hif, hit;
+long hmf, hmt;
+long diff, dift, dif;
 
 // Para leitura: *********************************
 const int echoPin1 = 9;
@@ -133,11 +135,26 @@ void loop() {
     Serial.println(" para T");
 
     delay(200);
+    recive = "";
   }
  
   if(recive == "Calibrate"){ 
-    
+    Serial.println("Iniciando Calibrate");
+    lcd.setCursor(0,5);
+    lcd.print("Start");
+    lcd.setCursor(1,3);
+    lcd.print("Calibrate");
 
+    leituraT();
+    leituraF();
+    hmf = distanceF;
+    hmt = distanceT;
+
+    diff = hif-hmf;
+    dift = hit-hmt;
+    dif = diff-dift;
+
+    recive = "";
   }
 
 }
