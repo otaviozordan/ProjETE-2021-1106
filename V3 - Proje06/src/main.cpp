@@ -96,11 +96,19 @@ void loop() {
     hif = distanceF;
     hit = distanceT;
 
-    lcd.clear();
     lcd.setCursor(0,0);
-    lcd.print(hif);
+    lcd.print("H set traseiro");
     lcd.setCursor(0,1);
     lcd.print(hit);
+    delay(500);
+    lcd.clear();
+
+    lcd.setCursor(0,0);
+    lcd.print("H set frontal");
+    lcd.setCursor(0,1);
+    lcd.print(hif);
+    delay(500);
+    lcd.clear();
 
     Serial.println("As distancias definidas como padrao foram: ");
     Serial.print(hif);
@@ -108,8 +116,6 @@ void loop() {
     Serial.print(hit);
     Serial.println(" para T");
 
-    delay(800);
-    lcd.clear();
     recive = "";
   }
  
@@ -130,6 +136,7 @@ void loop() {
   
   if(recive == "Calibrate"){ 
     Serial.println("Iniciando Calibrate");
+
     lcd.setCursor(5,0);
     lcd.print("Start");
     lcd.setCursor(3,1);
@@ -147,20 +154,34 @@ void loop() {
     dif = diff-dift;
 
     lcd.setCursor(0,0);
-    lcd.print("Comprecao de");
+    lcd.print("Comprecao t de");
+    lcd.setCursor(0,1);
+    lcd.print(dift);
+    delay(500);
+    lcd.clear();
+
+    lcd.setCursor(0,0);
+    lcd.print("Comprecao f de");
+    lcd.setCursor(0,1);
+    lcd.print(diff);
+    delay(500);
+    lcd.clear();
+
+    lcd.setCursor(0,0);
+    lcd.print("Diferenca de: ");
     lcd.setCursor(0,1);
     lcd.print(dif);
     delay(500);
     lcd.clear();
 
-    Serial.println("Diferenca traseira de: ");
-    Serial.print(dift);
+    Serial.print("Diferenca traseira de: ");
+    Serial.println(dift);
 
-    Serial.println("Diferenca frontal de: ");
-    Serial.print(diff);   
+    Serial.print("Diferenca frontal de: ");
+    Serial.println(diff);   
 
-    Serial.println("Diferenca entre eixos de: ");
-    Serial.print(dif);
+    Serial.print("Diferenca entre eixos de: ");
+    Serial.println(dif);
 
     slaveBoard.print("dif");
     slaveBoard.print(dif);
