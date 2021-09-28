@@ -108,7 +108,7 @@ void loop() {
 
   if(Serial.available()){  //Verifica a chegada de algo pela serial
     recive = Serial.readString(); //Realiza a importação de comandos de debug pelo serial
-    Serial.println(recive);
+    //Serial.println(recive);
   }
     
   if(recive == "SetHigh"){ //Para fazer a leitura - SetHigh 
