@@ -1,12 +1,8 @@
 //Projeto: V3 - Projete
-//Autor Inicial: Otávio Zordan
-//Colaboradores: 
-
-// Debug :
-// SetHigh - Para fazer a leitura de carga vazia 
+//Autor Inicial: Otávio Zordan, Rayssa Paduan, Kayque Amado, Beatriz Lacerda, Leticia Rodrigues
 
 #include <Arduino.h>
-#include <LiquidCrystal.h> // Adiciona a biblioteca "LiquidCrystal" ao projeto
+#include <LiquidCrystal.h> //Adiciona a biblioteca "LiquidCrystal" ao projeto
 #include <SoftwareSerial.h> //Para comunicação entre arduinos
 
 SoftwareSerial slaveBoard (2, 3); //Informa a conexão com slave
@@ -83,7 +79,8 @@ void loop() {
 
   if(Serial.available()){  //Verifica a chegada de algo pela serial
     recive = Serial.readString(); //Realiza a importação de comandos de debug pelo serial
-    //Serial.println(recive);
+    Serial.println("Recebido");
+    Serial.println(recive);
   }
     
   if(recive == "SetHigh"){ //Para fazer a leitura - SetHigh 
@@ -144,8 +141,11 @@ void loop() {
     dift = hit-hmt;
     dif = diff-dift;
 
+    slaveBoard.print("dif");
+    slaveBoard.print(dif);
+
+    slaveBoard.print("lh");
+    slaveBoard.print(lh);
     recive = "";
   }
-
-
 }
