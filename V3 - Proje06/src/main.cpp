@@ -4,9 +4,11 @@
 #include <Arduino.h>
 #include <LiquidCrystal.h> //Adiciona a biblioteca "LiquidCrystal" ao projeto
 #include <SoftwareSerial.h> //Para comunicação entre arduinos
+#include <Servo.h>
 
 SoftwareSerial slaveBoard (10, 13); //Informa a conexão com slave
 LiquidCrystal lcd(12, 11, 5, 4, 3, 2); // Pinagem do LCD
+Servo myservo;
 
 String recive;
 
@@ -72,7 +74,8 @@ void setup(){
   Serial.begin(9600); //Inicia monito serial
   slaveBoard.begin(9600); //Inicia a comunicação com o slave
   lcd.begin(16, 2); // Inicia o lcd de 16x2
-
+  myservo.attach(10);
+  
 }
 
 void loop() {
@@ -194,8 +197,16 @@ void loop() {
     delay(400);
     lcd.clear();
     recive = "";
+    myservo.write(abs(dif*3)); 
+   	//myservo.write(180);
+    delay(500);
   }
   
+    if(recive == "Zerar"){ 
+      Serial.println("Zerando Valores");
+      hif = 0;
+      hit = 0;
+    }
   /*
   if(slaveBoard.available()){  //Verifica a chegada de algo pela serial
      if(slaveBoard.readString() == "Confirmar Conexao"){
