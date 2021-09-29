@@ -195,4 +195,13 @@ void loop() {
     lcd.clear();
     recive = "";
   }
+  
+  /*
+  if(slaveBoard.available()){  //Verifica a chegada de algo pela serial
+     if(slaveBoard.readString() == "Confirmar Conexao"){
+      slaveBoard.print("Confirmada");
+      Serial.println("Conexao Confirmada");
+     }
+  }
+  */
 }
