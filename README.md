@@ -14,9 +14,9 @@
 
 O projeto ainda está em desenvolvimento e as próximas atualizações serão voltadas nas seguintes tarefas:
 
-- [x] Tarefa 1
+- [x] 
 - [x] Tarefa 2
-- [x] Tarefa 3
+- [x] Criar um sistema de debug para o projeto
 - [ ] Tarefa 4
 - [ ] Tarefa 5
 
