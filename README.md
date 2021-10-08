@@ -14,10 +14,10 @@
 
 O projeto ainda está em desenvolvimento e as próximas atualizações serão voltadas nas seguintes tarefas:
 
-- [x] Tarefa 1
-- [x] Tarefa 2
+- [x] Fazer as medições com os ultrassonicos
+- [x] Criar uma interface Homem-Maquina
 - [x] Criar um sistema de debug para o projeto
-- [ ] Tarefa 4
+- [ ] Realizar a comunicação Master-Slave
 - [ ] Tarefa 5
 
 ## 💻 Pré-requisitos
