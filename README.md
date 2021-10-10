@@ -107,3 +107,32 @@ Quer fazer parte desse projeto? Clique [AQUI](CONTRIBUTING.md) e leia como contr
 Esse projeto está sob licença. Veja o arquivo [LICENÇA](LICENSE.md) para mais detalhes.
 
 [⬆ Voltar ao topo](#nome-do-projeto)<br>
+
+<details>
+  <summary>📦 Packages</summary>
+  
+  
+
+| Name                 | A short summary                              | Install   | Downloads |
+| -------------------- | -------------------------------------------- | --------- | --------- |
+| [Slack Exception Send](https://github.com/alexandresanlim/DotNet.Slack.ExceptionSend) | Send exceptions from applications to Slack.  | [![Nuget](https://img.shields.io/nuget/v/Slack.Exception.Send)](https://www.nuget.org/packages/Slack.Exception.Send) | [![Nuget](https://img.shields.io/nuget/dt/Slack.Exception.Send)](https://www.nuget.org/packages/Slack.Exception.Send) |
+| [BrazilHolidays.Net](https://github.com/alexandresanlim/BrazilHolidays.Net)   | Work with Brazil holidays on applications.   | [![Nuget](https://img.shields.io/nuget/v/BrazilHolidays.Net)](https://www.nuget.org/packages/BrazilHolidays.Net) | [![Nuget](https://img.shields.io/nuget/dt/BrazilHolidays.Net)](https://www.nuget.org/packages/BrazilHolidays.Net) |
+<!-- | Content Cell         | Content Cell                                | link | link | -->
+  
+</details>
+  
+
+<!--
+**alexandresanlim/alexandresanlim** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+
+Here are some ideas to get you started:
+
+- 🔭 I’m currently working on ...
+- 🌱 I’m currently learning ...
+- 👯 I’m looking to collaborate on ...
+- 🤔 I’m looking for help with ...
+- 💬 Ask me about ...
+- 📫 How to reach me: ...
+- 😄 Pronouns: ...
+- ⚡ Fun fact: ...
+-->
