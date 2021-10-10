@@ -18,7 +18,7 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
 - [x] Criar uma interface Homem-Maquina
 - [x] Criar um sistema de debug para o projeto
 - [ ] Realizar a comunicação Master-Slave
-- [ ] Tarefa 5
+- [ ] Testes e correção de bugs
 
 ## 💻 Pré-requisitos
 
