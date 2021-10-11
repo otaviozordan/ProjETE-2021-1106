@@ -7,7 +7,7 @@
 ![GitHub forks](https://img.shields.io/github/forks/otaviozordan/21Proj06?style=for-the-badge)
 ![Bitbucket open issues](https://img.shields.io/bitbucket/issues/otaviozordan/21Proj06?style=for-the-badge)
 ![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/otaviozordan/21Proj06?style=for-the-badge)
-<img src="https://img.shields.io/github/license/otaviozordan/21Proj06?style=for-the-b> Repositorio destinado a comportar nossa projeto para a Projete21.adge">
+<img src="https://img.shields.io/github/license/otaviozordan/21Proj06?style=for-the-badge> Repositorio destinado a comportar nossa projeto para a Projete21.adge">
 
 > Repositorio destinado a comportar nossa projeto para a Projete21.
 
