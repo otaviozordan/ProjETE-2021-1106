@@ -71,8 +71,6 @@ Agradecemos às seguintes pessoas que contribuíram para este projeto:
 
 Esse projeto está sob licença. Veja o arquivo [LICENÇA](LICENSE.md) para mais detalhes.
 
-[⬆ Voltar ao topo](#21Proj06)<br>
-
 <details>
   <summary>📦 Packages</summary>
 
