@@ -9,7 +9,7 @@
 ![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/otaviozordan/21Proj06?style=for-the-badge)
 <img src="https://img.shields.io/github/license/otaviozordan/21Proj06?style=for-the-badge">
 
-> Repositorio destinado a comportar nossa projeto para a ProjETE21.
+> Repositorio destinado a comportar nossa projeto para a Projete21.
 
 ### Ajustes e melhorias
 
