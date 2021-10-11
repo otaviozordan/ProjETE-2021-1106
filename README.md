@@ -31,7 +31,7 @@ O projeto teve seu inicio após meu pai quase colidir com outro veiculo por ofus
   <a href="https://www.evernote.com/shard/s514/sh/6707ce40-a144-d16c-2ce9-a178e2f5d89f/bb6ba8ba6df5936f6250cbdbbc6b583c">
     <img src="https://github.com/otaviozordan/21Proj06/blob/main/img/Evernote-Logo.png" />  
   </a>&nbsp;&nbsp;
-  
+ Confira nosso diario! 
 </p>
 
 ## 🤝 Colaboradores
