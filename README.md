@@ -69,7 +69,7 @@ Agradecemos às seguintes pessoas que contribuíram para este projeto:
 
 ## 📝 Licença
 
-Esse projeto está sob licença. Veja o arquivo [LICENÇA](LICENSE.md) para mais detalhes.
+Esse projeto está sob licença. Veja o arquivo [LICENÇA](https://github.com/otaviozordan/21Proj06/blob/main/LICENSE) para mais detalhes.
 
 <details>
   <summary>📦 Packages</summary>
