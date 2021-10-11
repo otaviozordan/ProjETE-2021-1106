@@ -7,7 +7,7 @@
 ![GitHub forks](https://img.shields.io/github/forks/otaviozordan/21Proj06?style=for-the-badge)
 ![Bitbucket open issues](https://img.shields.io/bitbucket/issues/otaviozordan/21Proj06?style=for-the-badge)
 ![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/otaviozordan/21Proj06?style=for-the-badge)
-<img src="https://img.shields.io/github/license/otaviozordan/21Proj06?style=for-the-badge">
+<img src="https://img.shields.io/github/license/otaviozordan/21Proj06?style=for-the-b> Repositorio destinado a comportar nossa projeto para a Projete21.adge">
 
 > Repositorio destinado a comportar nossa projeto para a Projete21.
 
@@ -26,13 +26,13 @@ O Ajuste Dinamico de Faróis Automtivos se trata de um projeto que tem como obje
 O projeto teve seu inicio após meu pai quase colidir com outro veiculo por ofuscar sua visão turante o translado de uma carga de muita massa por uma estrada de terra.
 
 ## 📫 Diario de Bordo
+> Confira nosso diario!
 <p align='center'>
  
   <a href="https://www.evernote.com/shard/s514/sh/6707ce40-a144-d16c-2ce9-a178e2f5d89f/bb6ba8ba6df5936f6250cbdbbc6b583c">
     <img src="https://github.com/otaviozordan/21Proj06/blob/main/img/Evernote-Logo.png" />  
   </a>&nbsp;&nbsp;
 </p>
-<p> Confira nosso diario! </p>
 
 ## 🤝 Colaboradores
 
