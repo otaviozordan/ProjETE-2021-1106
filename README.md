@@ -7,6 +7,7 @@
 ![GitHub forks](https://img.shields.io/github/forks/otaviozordan/21Proj06?style=for-the-badge)
 ![Bitbucket open issues](https://img.shields.io/bitbucket/issues/otaviozordan/21Proj06?style=for-the-badge)
 ![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/otaviozordan/21Proj06?style=for-the-badge)
+<img src="https://img.shields.io/github/license/otaviozordan/21Proj06?style=for-the-badge">
 
 > Linha adicional de texto informativo sobre o que o projeto faz. Sua introdução deve ter cerca de 2 ou 3 linhas. Não exagere, as pessoas não vão ler.
 
