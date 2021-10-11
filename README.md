@@ -26,7 +26,13 @@ O Ajuste Dinamico de Faróis Automtivos se trata de um projeto que tem como obje
 O projeto teve seu inicio após meu pai quase colidir com outro veiculo por ofuscar sua visão turante o translado de uma carga de muita massa por uma estrada de terra.
 
 ## 📫 Diario de Bordo
-
+<p align='center'>
+ 
+  <a href="https://www.evernote.com/shard/s514/sh/6707ce40-a144-d16c-2ce9-a178e2f5d89f/bb6ba8ba6df5936f6250cbdbbc6b583c">
+    <img src="https://github.com/otaviozordan/21Proj06/blob/main/img/EvernoteLogo.png" />  
+  </a>&nbsp;&nbsp;
+  
+</p>
 
 ## 🤝 Colaboradores
 
