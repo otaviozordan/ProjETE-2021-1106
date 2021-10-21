@@ -42,7 +42,7 @@ Agradecemos às seguintes pessoas que contribuíram para este projeto:
   <tr>
     <td align="center">
       <a href="#">
-        <img src="https://scontent-gig2-1.cdninstagram.com/v/t51.2885-19/s150x150/245155276_266723848678779_8501460489010009455_n.jpg?_nc_ht=scontent-gig2-1.cdninstagram.com&_nc_ohc=GUzCOCb9NMgAX_zgunD&edm=ABfd0MgBAAAA&ccb=7-4&oh=591f4bde2e61a3d550d26e7ef3682da7&oe=616BE8CA&_nc_sid=7bff83" width="100px;" alt="Foto do Otávio Zordan no GitHub"/><br>
+        <img src="https://github.com/otaviozordan/21Proj06/blob/main/img/Foto%20Ot%C3%A1vio.jpeg" width="100px;" alt="Foto do Otávio Zordan no GitHub"/><br>
         <sub>
           <b>Otávio Zordan</b>
         </sub>
