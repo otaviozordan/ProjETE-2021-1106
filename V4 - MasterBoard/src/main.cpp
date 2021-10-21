@@ -1,7 +1,7 @@
 //Projeto: V4 - Projete
-//Autor Inicial: Otávio Zordan, Rayssa Paduan, Kayque Amado, Beatriz Lacerda, Leticia Rodrigues
+//Autor Inicial: Otávio Zordan
 
-#include <Arduino.h>
+
 #include <LiquidCrystal.h> //Adiciona a biblioteca "LiquidCrystal" ao projeto
 
 LiquidCrystal lcd(12, 11, 5, 4, 3, 2); // Pinagem do LCD
@@ -13,7 +13,9 @@ float hmf, hmt;
 float diff, dift, dif;
 float lh;
 
-// Para leitura: *********************************
+int k, comand;
+
+// Para leitura:
 const int echoPin1 = 7;
 const int trigPin1 = 6;
 
@@ -57,9 +59,6 @@ void leituraF(){ //Leitura frontal
 
 }
 
-//****************************************************
-
-
 void setup(){
   pinMode(trigPin1, OUTPUT); //Define os pinos do ultrassonico 1
   pinMode(echoPin1, INPUT);
@@ -74,19 +73,27 @@ void setup(){
 
 void loop() {
 
+  k = analogRead(A0);
+  k = map(k, 1, 1023, 1, 4);
+
+  if(digitalRead(10) == 1){
+    comand = k ;
+  }
+  
   if(Serial.available()){  //Verifica a chegada de algo pela serial
     recive = Serial.readString(); //Realiza a importação de comandos de debug pelo serial
     Serial.println("Comando recebido");
-  }
-    
-  if(recive == "SetHigh"){ //Para fazer a leitura - SetHigh 
+    Serial.println("");
+  }   
+
+  if(recive == "Definir Altura Padrao" || comand == 1){ //Para fazer a leitura - SetHigh 
     Serial.println("Iniciando SetHigh");
 
-    lcd.setCursor(5,0);
-    lcd.print("Start");
-    lcd.setCursor(4,1);
-    lcd.print("SetHigh");
-    delay(400);
+    lcd.setCursor(4,0);
+    lcd.print("Definido");
+    lcd.setCursor(2,1);
+    lcd.print("Altura Padrao");
+    delay(200);
 
     leituraT();
     leituraF();
@@ -94,14 +101,14 @@ void loop() {
     hit = distanceT;
 
     lcd.setCursor(0,0);
-    lcd.print("H set traseiro");
+    lcd.print("H padrão traseiro");
     lcd.setCursor(0,1);
     lcd.print(hit);
     delay(500);
     lcd.clear();
 
     lcd.setCursor(0,0);
-    lcd.print("H set frontal");
+    lcd.print("H padrão frontal");
     lcd.setCursor(0,1);
     lcd.print(hif);
     delay(500);
@@ -112,33 +119,34 @@ void loop() {
     Serial.println(" para F");
     Serial.print(hit);
     Serial.println(" para T");
-
     recive = "";
+    Serial.println("");
   }
- 
-  if (recive == "LHigh") {
+
+  else if (recive == "H Farol " || comand == 2) {
     if(Serial.available()){  //Verifica a chegada de algo pela serial
       lh = Serial.read();
 
       lcd.setCursor(5,0);
-      lcd.print("LHigh");
+      lcd.print("H Farol");
       lcd.setCursor(4,1);
       lcd.print(lh);
 
       Serial.println("Recebemos o valor de:");
       Serial.println(lh);
       recive = "";
+      Serial.println("");
     }
   }
-  
-  if(recive == "Calibrate"){ 
-    Serial.println("Iniciando Calibrate");
+
+  else if(recive == "Calibracao" || comand == 3){ 
+    Serial.println("Iniciando Calibração");
 
     lcd.setCursor(5,0);
     lcd.print("Start");
     lcd.setCursor(3,1);
     lcd.print("Calibrate");
-    delay(500);
+    delay(200);
     lcd.clear();
 
     leituraT();
@@ -168,7 +176,7 @@ void loop() {
     lcd.print("Diferenca de: ");
     lcd.setCursor(0,1);
     lcd.print(dif);
-    delay(500);
+    delay(300);
     lcd.clear();
 
     Serial.print("Diferenca traseira de: ");
@@ -185,13 +193,54 @@ void loop() {
     delay(400);
     lcd.clear();
     recive = "";
-    delay(500);
+    Serial.println("");   
   }
-  
-    if(recive == "Zerar"){ 
-      Serial.println("Zerando Valores");
-      hif = 0;
-      hit = 0;
+
+  else if(recive == "Zerar" || comand == 4){ 
+    Serial.println("Zerando Valores");
+    hif = 0;
+    hit = 0;
+    Serial.println(""); 
+    recive = "";
+  }
+  else{
+    if(k == 1){
+      lcd.setCursor(3, 0);
+      lcd.print("Definir");
+      lcd.setCursor(2, 1);
+      lcd.print("Altura Padrao"); 
+      delay(50);
+      lcd.clear();  
     }
 
+    if(k == 2){
+      lcd.setCursor(1, 0);
+      lcd.print("Definir Altura");
+      lcd.setCursor(4, 1);
+      lcd.print("do Farol"); 
+      delay(50);
+      lcd.clear();        
+    }
+
+    if(k == 3){
+      lcd.setCursor(5, 0);
+      lcd.print("Fazer");
+      lcd.setCursor(3, 1);
+      lcd.print("Calibracao");   
+      delay(50);
+      lcd.clear();      
+    }
+
+    if(k == 4){
+     lcd.setCursor(3, 0);
+     lcd.print("Definir");
+     lcd.setCursor(2, 1);
+     lcd.print("Valores Zero"); 
+     delay(50);
+     lcd.clear();
+    }
+  }
+
+  comand = 0;
+  
 }
