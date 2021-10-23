@@ -72,7 +72,11 @@ Agradecemos às seguintes pessoas que contribuíram para este projeto:
 
 Esse projeto está sob licença. Veja o arquivo [LICENÇA](https://github.com/otaviozordan/21Proj06/blob/main/LICENSE) para mais detalhes.
 
+## 📝 Como usar o projeto:
+
 <details>
   <summary>📦 Packages</summary>
 
 </details>
+
+[⬆ Voltar ao topo](#)<br>
