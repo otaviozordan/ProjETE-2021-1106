@@ -43,26 +43,17 @@ Agradecemos às seguintes pessoas que contribuíram para este projeto:
   <tr>
     <td align="center">
       <a href="#">
-        <img src="" width="100px;" alt="Foto do Steve Jobs"/><br>
+        <img src="" width="100px;" alt="Foto de José Manuel (Memel)"/><br>
         <sub>
-          <b><p>José Manuel</p><p>(Orientador></p></b>
+          <b><p>José Manuel</p><p>(Orientador)</p></b>
         </sub>
       </a>
     </td>
-  </tr>  
     <td align="center">
       <a href="https://instagram.com/otaviozordan">
-        <img src="https://github.com/otaviozordan/21Proj06/blob/main/img/Foto%20Ot%C3%A1vio.jpeg" width="100px;" alt="Foto do Otávio Zordan no GitHub"/><br>
+        <img src="https://github.com/otaviozordan/21Proj06/blob/main/img/Foto%20Ot%C3%A1vio.jpeg" width="100px;" alt="Foto do Otávio Zordan no GitHub" width="100px;" alt="Foto do Otávio Zordan no GitHub"/><br>
         <sub>
           <b><p>Otávio Zordan</p><p>(Autor)</p></b>
-        </sub>
-      </a>
-    </td>
-    <td align="center">
-      <a href="#">
-        <img src="https://s2.glbimg.com/FUcw2usZfSTL6yCCGj3L3v3SpJ8=/smart/e.glbimg.com/og/ed/f/original/2019/04/25/zuckerberg_podcast.jpg" width="100px;" alt="Foto do Mark Zuckerberg"/><br>
-        <sub>
-          <b>Mark Zuckerberg</b>
         </sub>
       </a>
     </td>
