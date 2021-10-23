@@ -293,4 +293,9 @@ void loop() {
     }
     menu = !digitalRead(10);
   }
+
+  while (!menu){
+    /* code */
+  }
+  
 }

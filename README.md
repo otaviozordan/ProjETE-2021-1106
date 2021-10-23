@@ -75,9 +75,14 @@ Esse projeto está sob licença. Veja o arquivo [LICENÇA](https://github.com/ot
 ## 🚀 Como usar o projeto:
 No GitHub esta disposto apenas o código, os esquematicos de montagem estão presentes na pasta [...] 
 
+##
+
 <details>
   <summary>📦 Packages</summary>
-
+⭐ 
 </details>
 
-[⬆ Voltar ao topo](#)<br>
+<align='center'>
+  [⬆ Voltar ao topo](#)<br>
+</p>
+
