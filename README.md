@@ -37,6 +37,7 @@ O projeto teve seu inicio após meu pai quase colidir com outro veiculo por ofus
 ## 🤝 Colaboradores
 
 Agradecemos às seguintes pessoas que contribuíram para este projeto:
+>Adicione sua foto aqui:
 
 <table>
   <tr>
