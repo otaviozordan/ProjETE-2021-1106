@@ -45,7 +45,7 @@ Agradecemos às seguintes pessoas que contribuíram para este projeto:
       <a href="#">
         <img src="https://github.com/otaviozordan/21Proj06/blob/main/img/Foto%20Ot%C3%A1vio.jpeg" width="100px;" alt="Foto do Otávio Zordan no GitHub"/><br>
         <sub>
-          <b>Otávio Zordan</b>
+          <b><p>Otávio Zordan</p><p>(Autor)</p></b>
         </sub>
       </a>
     </td>
