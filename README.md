@@ -76,12 +76,12 @@ Esse projeto está sob licença. Veja o arquivo [LICENÇA](https://github.com/ot
 No GitHub esta disposto apenas o código, os esquematicos de montagem estão presentes na pasta [...] 
 
 ##
-
+<p>
 <details>
   <summary>📦 Packages</summary>
 ⭐ 
 </details>
-
+</p>
 <align='center'>
   [⬆ Voltar ao topo](#)<br>
 </p>
