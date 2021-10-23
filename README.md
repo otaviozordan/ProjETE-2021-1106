@@ -82,7 +82,6 @@ No GitHub esta disposto apenas o código, os esquematicos de montagem estão pre
 ⭐ 
 </details>
 </p>
-<align='center'>
+
   [⬆ Voltar ao topo](#)<br>
-</a>
 
