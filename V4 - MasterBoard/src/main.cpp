@@ -8,24 +8,21 @@ LiquidCrystal lcd(12, 11, 5, 4, 3, 2); // Pinagem do LCD
 
 String recive; //String para simular comandos da Central Eletronica
 
-float hif, hit; //Altura Inicial Fronta, Altura Inicial Traseira
-float hmf, hmt; //Altura Medida Frontal, Altura Medida Traseira
-float diff, dift, dif; //Diferença Frontal, Diferença Traseira, Difença F-T
-float lh,eeix ; // Altura Padrão do Faról em ralação ao chão, Entre Eixos 
+const float clock = 4; //Constante multiplicadora para corrigir o atraso do Tinkercad
+
+float hLeve; //Altura Inicial Fronta, Altura Inicial Traseira
+float hcarregado; //Altura Medida Frontal, Altura Medida Traseira
+float dif; //Diferença Frontal, Diferença Traseira, Difença F-T
+float lh, enex; // Altura Padrão do Faról em ralação ao chão, Entre Eixos 
+float teta, alpha, gama; //Angulos
 
 int k, comand; //k para mostrar no lcd e comand para executar as configurações
-
-bool menu; //Estado de seleção do menu
 
 // Para leitura:
 const int echoPin1 = 7;
 const int trigPin1 = 6;
 
-const int echoPin2 = 9;
-const int trigPin2 = 8;
-
 float duration1 ,distanceT;
-float duration2 ,distanceF;
 
 void leituraT(){ //Leitura traseira
 
@@ -44,63 +41,29 @@ void leituraT(){ //Leitura traseira
 
 }
 
-void leituraF(){ //Leitura frontal
-
-  digitalWrite(trigPin2, LOW);
-  delayMicroseconds(2);
-
-  digitalWrite(trigPin2, HIGH);
-  delayMicroseconds(10);
-
-  digitalWrite(trigPin2, LOW);
-  duration2 = pulseIn (echoPin2, HIGH);
-
-  distanceF = duration2/97.7;
-  //Serial.println(distanceF);
-  delay(50);
-
-}
-
 void setup(){
   pinMode(trigPin1, OUTPUT); //Define os pinos do ultrassonico 1
   pinMode(echoPin1, INPUT);
 
-  pinMode(trigPin2, OUTPUT); //Define os pinos do ultrassonico 2
-  pinMode(echoPin2, INPUT);
-
   Serial.begin(9600); //Inicia monito serial
   lcd.begin(16, 2); // Inicia o lcd de 16x2
-  
+
+  hLeve = 45; 
+  lh = 100;
+  enex = 379;
+
+  pinMode(9, OUTPUT);
 }
 
 void loop() {
 
-  k = analogRead(A0); //Leitura da posição do potenciometro
-  k = map(k, 1, 1023, 1, 5); //Converção para a lista do menu
+  k = analogRead(A0);
+  k = map(k, 1, 1023, 1, 6);
 
-  if (digitalRead(10)==1 && menu == false){  //Libera acesso ao menu
-    lcd.setCursor(2, 0);
-    lcd.print("Aguarde para");
-    lcd.setCursor(6, 1);
-    lcd.print("Menu");
-    delay(500);
-
-    if (digitalRead(10)==1){
-      menu = true
-      lcd.clear();
-      Serial.println("Entrando em menu")
-      Serial.println("");
-    }
-    else{
-      lcd.clear();
-      Serial.println("Modo exibicao");
-      Serial.println("");
-    }
-  }
-
-  if(digitalRead(10) == 1 && menu == true){ //Trasfere a mensagem no lcd para comando no menu
+  if(digitalRead(10) ==1){ //Controle de menu
     comand = k ;
-    Serial.println("Selecionado");
+    Serial.println("Selecionado funcao");
+    Serial.print(comand);
     Serial.println("");
   }
   
@@ -109,193 +72,209 @@ void loop() {
     Serial.println("Comando recebido");
     Serial.println("");
   }   
-  
-  while (menu){
 
-    if(recive == "Definir Altura Padrao" || comand == 1){ //Para fazer a leitura - SetHigh 
-      Serial.println("Iniciando SetHigh");
+  if(recive == "Definir Altura Padrao" || comand == 1){ //Para fazer a leitura - SetHigh 
+    Serial.println("Definir altura vazio");
 
-      lcd.setCursor(4,0);
-      lcd.print("Definido");
-      lcd.setCursor(2,1);
-      lcd.print("Altura Padrao");
-      delay(200);
+    lcd.setCursor(4,0);
+    lcd.print("Definido");
+    lcd.setCursor(2,1);
+    lcd.print("Altura Vazio");
+    delay(20*clock);
 
-      leituraT();
-      leituraF();
-      hif = distanceF;
-      hit = distanceT;
+    leituraT();
+    hLeve = distanceT;
 
-      lcd.setCursor(0,0);
-      lcd.print("H padrão traseiro");
-      lcd.setCursor(0,1);
-      lcd.print(hit);
-      delay(500);
-      lcd.clear();
+    lcd.setCursor(0,0);
+    lcd.print("H padrao traseiro");
+    lcd.setCursor(0,1);
+    lcd.print(hLeve);
+    delay(50*clock);
+    lcd.clear();
 
-      lcd.setCursor(0,0);
-      lcd.print("H padrão frontal");
-      lcd.setCursor(0,1);
-      lcd.print(hif);
-      delay(500);
-      lcd.clear();
+    Serial.println("As distancias definidas como padrao foram: ");
+    Serial.print(hLeve);
+    Serial.println(" para T");
+    recive = "";
+    Serial.println("");
+  }
 
-      Serial.println("As distancias definidas como padrao foram: ");
-      Serial.print(hif);
-      Serial.println(" para F");
-      Serial.print(hit);
-      Serial.println(" para T");
-      recive = "";
-      Serial.println("");
-    }
-
-    else if(recive == "Calibracao" || comand == 2){ 
-      Serial.println("Iniciando Calibração");
+  else if (recive == "Altura do Farol " || comand == 2) {
+    if(Serial.available()){  //Verifica a chegada de algo pela serial
+      lh = Serial.read();
 
       lcd.setCursor(5,0);
-      lcd.print("Start");
-      lcd.setCursor(3,1);
-      lcd.print("Calibrate");
-      delay(200);
-      lcd.clear();
+      lcd.print("H Farol");
+      lcd.setCursor(4,1);
+      lcd.print(lh);
 
-      leituraT();
-      leituraF();
-      hmf = distanceF;
-      hmt = distanceT;
-
-      diff = hif-hmf;
-      dift = hit-hmt;
-      dif = diff-dift;
-
-      lcd.setCursor(0,0);
-      lcd.print("Comprecao t de");
-      lcd.setCursor(0,1);
-      lcd.print(dift);
-      delay(300);
-      lcd.clear();
-
-      lcd.setCursor(0,0);
-      lcd.print("Comprecao f de");
-      lcd.setCursor(0,1);
-      lcd.print(diff);
-      delay(300);
-      lcd.clear();
-
-      lcd.setCursor(0,0);
-      lcd.print("Diferenca de: ");
-      lcd.setCursor(0,1);
-      lcd.print(dif);
-      delay(300);
-      lcd.clear();
-
-      Serial.print("Diferenca traseira de: ");
-      Serial.println(dift);
-
-      Serial.print("Diferenca frontal de: ");
-      Serial.println(diff);   
-
-      Serial.print("Diferenca entre eixos de: ");
-      Serial.println(dif);
-
-      lcd.setCursor(3, 0);
-      lcd.print("Calibrado");
-      delay(400);
-      lcd.clear();
+      Serial.println("Recebemos o valor de:");
+      Serial.println(lh);
       recive = "";
-      Serial.println("");   
+      Serial.println("");
+
+      delay(50*clock);
+      lcd.clear();
     }
+  }
 
-    else if (recive == "H Farol " || comand == 3) {
-      if(Serial.available()){  //Verifica a chegada de algo pela serial
-        lh = Serial.read();
+  else if (recive == "Entre Eixos " || comand == 3) {
+    if(Serial.available()){  //Verifica a chegada de algo pela serial
+      enex = Serial.read();
 
-        lcd.setCursor(5,0);
-        lcd.print("H Farol");
-        lcd.setCursor(4,1);
-        lcd.print(lh);
-        delay(200);
+      lcd.setCursor(3,0);
+      lcd.print("Entre Eixo");
+      lcd.setCursor(4,1);
+      lcd.print(enex);
 
-        Serial.println("Recebemos o valor de:");
-        Serial.println(lh);
-        recive = "";
-        Serial.println("");
-      }
-    }
-
-    else if(recive == "Entre Eixos" || comand == 4){ 
-      Serial.println("Zerando Valores");
-      hif = 0;
-      hit = 0;
-      Serial.println(""); 
+      Serial.println("Recebemos o valor de:");
+      Serial.println(enex);
       recive = "";
-    }
+      Serial.println("");
 
-    else if(recive == "Zerar" || comand == 5){ 
-      Serial.println("Zerando Valores");
-      hif = 0;
-      hit = 0;
-      Serial.println(""); 
-      recive = "";
+      delay(50*clock);
+      lcd.clear();
     }
+  }
 
-    else{
-      switch (k){
+  else if(recive == "Calibracao" || comand == 4){ 
+    Serial.println("Iniciando Calibracao");
+
+    lcd.setCursor(3,0);
+    lcd.print("Iniciando");
+    lcd.setCursor(2,1);
+    lcd.print("Calibracao");
+    delay(20*clock);
+    lcd.clear();
+
+    leituraT();
+    hcarregado = distanceT;
+
+    alpha = atan(5/lh);
+
+    dif = hLeve-hcarregado;
+    teta = atan(dif/enex);
+
+    gama = alpha+teta;
+
+    digitalWrite(9, HIGH);
+    delay(5);
+    Serial.println(gama);
+    delay(5);
+    digitalWrite(9, LOW);
+
+    
+    lcd.setCursor(0,0);
+    lcd.print("Compressao t de");
+    lcd.setCursor(0,1);
+    lcd.print(dif);
+    delay(50*clock);
+    lcd.clear();
+
+    lcd.setCursor(0,0);
+    lcd.print("Angulo Gama");
+    lcd.setCursor(0,1);
+    lcd.print(gama);
+    delay(50*clock);
+    lcd.clear();
+
+    lcd.setCursor(1,0);
+    lcd.print("Giro no motor");
+    lcd.setCursor(0,1);
+    lcd.print(gama*360);
+    delay(50*clock);
+    lcd.clear();
+
+    lcd.setCursor(3, 0);
+    lcd.print("Calibrado");
+    delay(40*clock);
+    lcd.clear();
+    recive = "";
+    Serial.println("");   
+  }
+
+  else if(recive == "Zerar" || comand == 5){ 
+    Serial.println("Zerando Valores");
+    Serial.println(""); 
+
+    hLeve = 0;
+
+    lcd.print("Valores Zerados");
+    delay(50*clock);
+    lcd.clear();
+
+    recive = "";
+  }
+  
+  else{
+    switch (k){
       case 1:
         lcd.setCursor(3, 0);
         lcd.print("Definir");
         lcd.setCursor(2, 1);
         lcd.print("Altura Padrao"); 
-        delay(5);
+        delay(20);
         lcd.clear();  
       break;
 
-      case 2:
+      case 4:
         lcd.setCursor(5, 0);
         lcd.print("Fazer");
         lcd.setCursor(3, 1);
         lcd.print("Calibracao");   
-        delay(5);
-        lcd.clear();    
-      break;    
+        delay(20);
+        lcd.clear();
+      break;
 
-      case 3:
+      case 2:
         lcd.setCursor(1, 0);
         lcd.print("Definir Altura");
         lcd.setCursor(4, 1);
         lcd.print("do Farol"); 
-        delay(5);
-        lcd.clear();   
+        delay(20);
+        lcd.clear();    
       break;
 
-      case 4:
+      case 3:
         lcd.setCursor(3, 0);
         lcd.print("Definir");
         lcd.setCursor(2, 1);
         lcd.print("Entre Eixos"); 
-        delay(5);
-        lcd.clear();   
+        delay(20);
+        lcd.clear();     
+      break;      
 
       case 5:
         lcd.setCursor(3, 0);
         lcd.print("Definir");
         lcd.setCursor(2, 1);
         lcd.print("Valores Zero"); 
-        delay(5);
-        lcd.clear();   
-      break;  
+        delay(20);
+        lcd.clear();  
+      break;
+
+      case 6:
+        lcd.setCursor(0,0);
+        lcd.print("Compressao t de");
+        lcd.setCursor(0,1);
+        lcd.print(dif);
+        delay(50*clock);
+        lcd.clear();
+
+        lcd.setCursor(0,0);
+        lcd.print("Angulo Gama");
+        lcd.setCursor(0,1);
+        lcd.print(gama);
+        delay(50*clock);
+        lcd.clear();
+      break;
 
       default:
-        //***Comand**
+       /*Comand*/
       break;
-      }
-      comand = 0;
     }
-    menu = !digitalRead(10);
   }
 
-  while (!menu){
-    /* code */
-  }
+  comand = 0;
   
 }
