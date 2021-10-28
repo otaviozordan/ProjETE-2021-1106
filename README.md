@@ -43,7 +43,7 @@ Agradecemos às seguintes pessoas que contribuíram para este projeto:
   <tr>
     <td align="center">
       <a href="#">
-        <img src="" width="100px;" alt="Foto de José Manuel (Memel)"/><br>
+        <img src="https://github.com/otaviozordan/21Proj06/blob/main/img/Foto%20Memel.jpeg" width="100px;" alt="Foto de José Manuel (Memel)"/><br>
         <sub>
           <b><p>José Manuel</p><p>(Orientador)</p></b>
         </sub>
