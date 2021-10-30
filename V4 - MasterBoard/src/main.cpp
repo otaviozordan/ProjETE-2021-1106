@@ -8,13 +8,13 @@ LiquidCrystal lcd(12, 11, 5, 4, 3, 2); // Pinagem do LCD
 
 String recive; //String para simular comandos da Central Eletronica
 
-const float clock = 4; //Constante multiplicadora para corrigir o atraso do Tinkercad
+const float clock = 3; //Constante multiplicadora para corrigir o atraso do Tinkercad
 
 float hLeve; //Altura Inicial Fronta, Altura Inicial Traseira
 float hcarregado; //Altura Medida Frontal, Altura Medida Traseira
 float dif; //Diferença Frontal, Diferença Traseira, Difença F-T
 float lh, enex; // Altura Padrão do Faról em ralação ao chão, Entre Eixos 
-float teta, alpha, gama; //Angulos
+float teta, alpha, gama; //Anulo de correção
 
 int k, comand; //k para mostrar no lcd e comand para executar as configurações
 
@@ -44,15 +44,19 @@ void leituraT(){ //Leitura traseira
 void setup(){
   pinMode(trigPin1, OUTPUT); //Define os pinos do ultrassonico 1
   pinMode(echoPin1, INPUT);
-
+  
+  pinMode(10,INPUT);
+  pinMode(8, OUTPUT);
+  pinMode(9, OUTPUT);
+  
   Serial.begin(9600); //Inicia monito serial
   lcd.begin(16, 2); // Inicia o lcd de 16x2
 
-  hLeve = 45; 
-  lh = 100;
-  enex = 379;
+  hLeve = 15; 
+  lh = 1;
+  enex = 3.79;
 
-  pinMode(9, OUTPUT);
+  digitalWrite(8,HIGH);
 }
 
 void loop() {
@@ -81,6 +85,7 @@ void loop() {
     lcd.setCursor(2,1);
     lcd.print("Altura Vazio");
     delay(20*clock);
+    lcd.clear();
 
     leituraT();
     hLeve = distanceT;
@@ -258,14 +263,14 @@ void loop() {
         lcd.print("Compressao t de");
         lcd.setCursor(0,1);
         lcd.print(dif);
-        delay(50*clock);
+        delay(200*clock);
         lcd.clear();
 
         lcd.setCursor(0,0);
         lcd.print("Angulo Gama");
         lcd.setCursor(0,1);
         lcd.print(gama);
-        delay(50*clock);
+        delay(200*clock);
         lcd.clear();
       break;
 
