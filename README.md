@@ -7,7 +7,7 @@
 ![GitHub forks](https://img.shields.io/github/forks/otaviozordan/21Proj06?style=for-the-badge)
 <img src="https://img.shields.io/github/contributors/otaviozordan/21Proj06?style=for-the-badge"/>
 ![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/otaviozordan/21Proj06?style=for-the-badge)
-<img src="https://img.shields.io/github/license/otaviozordan/21Proj06?style=for-the-badge"/>
+<!---img src="https://img.shields.io/github/license/otaviozordan/21Proj06?style=for-the-badge"/--->
 
 > Repositorio destinado a comportar nossa projeto para a Projete21.
 
@@ -18,7 +18,7 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
 - [x] Fazer as medições com os ultrassonicos
 - [x] Criar uma interface Homem-Maquina
 - [x] Criar um sistema de debug para o projeto
-- [ ] Realizar a comunicação Master-Slave
+- [x] Realizar a comunicação Master-Slave
 - [ ] Testes e correção de bugs
 
 ## 💻 Sobre o projeto:
