@@ -222,15 +222,6 @@ void loop() {
         lcd.clear();  
       break;
 
-      case 4:
-        lcd.setCursor(5, 0);
-        lcd.print("Fazer");
-        lcd.setCursor(3, 1);
-        lcd.print("Calibracao");   
-        delay(20);
-        lcd.clear();
-      break;
-
       case 2:
         lcd.setCursor(1, 0);
         lcd.print("Definir Altura");
@@ -247,7 +238,16 @@ void loop() {
         lcd.print("Entre Eixos"); 
         delay(20);
         lcd.clear();     
-      break;      
+      break;
+
+      case 4:
+        lcd.setCursor(5, 0);
+        lcd.print("Fazer");
+        lcd.setCursor(3, 1);
+        lcd.print("Calibracao");   
+        delay(20);
+        lcd.clear();
+      break;
 
       case 5:
         lcd.setCursor(3, 0);
