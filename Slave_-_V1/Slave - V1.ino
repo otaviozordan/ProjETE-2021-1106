@@ -1,4 +1,7 @@
 #include <Stepper.h>
+#include <EEPROM.h>
+
+int address; //Endereço de salvamento da EEPROM
 
 const int stepsPerRevolution = 200;  // Define o numero de passo por volta (de acordo com seu motor) 
 
@@ -14,15 +17,23 @@ void setup() {
   
   pinMode(10, INPUT);
 
+  gamaAnterior = EEPROM.read(address); //Le valor salvo na EEPROM
 }
 
 void loop() {
 
   if (Serial.available() && digitalRead(10) == 1){
-    recive = Serial.readString();
+    gama = Serial.read();
+
     if (gama != gamaAnterior){
-      Serial.println("Corrigindo");   
       myStepper.step((gama-gamaAnterior)*360);
+
+      Serial.println("Corrigindo");   
+      Serial.println(gama-gamaAnterior);
+
+      gamaAnterior = gama;
+
+      EEPROM.update(address, gamaAnterior);
     }
     
   }
