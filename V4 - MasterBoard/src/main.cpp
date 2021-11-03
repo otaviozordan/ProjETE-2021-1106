@@ -16,6 +16,7 @@ float dif; //Diferença Frontal, Diferença Traseira, Difença F-T
 float lh, enex; // Altura Padrão do Faról em ralação ao chão, Entre Eixos 
 float teta, alpha, gama; //Anulo de correção
 
+bool estado; //Para guardar o estado do Slave
 int k, comand; //k para mostrar no lcd e comand para executar as configurações
 
 // Para leitura:
@@ -62,7 +63,7 @@ void setup(){
 void loop() {
 
   k = analogRead(A0);
-  k = map(k, 1, 1023, 1, 6);
+  k = map(k, 1, 1023, 1, 7);
 
   if(digitalRead(10) ==1){ //Controle de menu
     comand = k ;
@@ -210,6 +211,47 @@ void loop() {
 
     recive = "";
   }
+
+  else if(recive == "Estado do Slave" || comand == 7){  
+    lcd.setCursor(0,0);
+    lcd.print("ligar/desligar");
+    lcd.setCursor(5,1);
+    lcd.print("slave");
+    delay(200*clock);
+    lcd.clear();    
+
+    if(digitalRead(10) == 1){
+      Serial.println("Mudando estado do Slave");
+      estado = !estado;
+    }
+
+    if(estado == true){
+      Serial.println("Ligando Slave");
+      Serial.println("");
+      digitalWrite(8, HIGH);
+
+      lcd.setCursor(4,0);
+      lcd.print("Ligando");
+      lcd.setCursor(5,1);
+      lcd.print("Slave");
+      delay(200*clock);
+      lcd.clear();
+    }
+
+    if(estado == false){
+      Serial.println("Desligando Slave");
+      Serial.println("");
+      digitalWrite(8, LOW);
+
+      lcd.setCursor(2,0);
+      lcd.print("Desligando");
+      lcd.setCursor(5,1);
+      lcd.print("Slave");
+      delay(200*clock);
+      lcd.clear();      
+    }
+
+  }
   
   else{
     switch (k){
@@ -271,6 +313,22 @@ void loop() {
         lcd.setCursor(0,1);
         lcd.print(gama);
         delay(200*clock);
+        lcd.clear();
+      break;
+
+      case 7:
+        lcd.setCursor(0,0);
+        lcd.print("Estado do Slave");
+        lcd.setCursor(0,1);
+
+        if (estado == true){
+          lcd.print("ON");
+        }
+        else{
+          lcd.print("OFF");
+        }
+
+        delay(20);
         lcd.clear();
       break;
 

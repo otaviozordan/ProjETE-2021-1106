@@ -33,7 +33,7 @@ void loop() {
 
       gamaAnterior = gama;
 
-      EEPROM.update(address, gamaAnterior);
+      EEPROM.update(address, gamaAnterior); //Atualiza o valor na EEPROM
     }
     
   }
