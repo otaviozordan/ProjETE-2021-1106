@@ -3,8 +3,11 @@
 
 
 #include <LiquidCrystal.h> //Adiciona a biblioteca "LiquidCrystal" ao projeto
+#include <EEPROM.h>
 
 LiquidCrystal lcd(12, 11, 5, 4, 3, 2); // Pinagem do LCD
+
+int address; //Endereço de salvamento da EEPROM
 
 String recive; //String para simular comandos da Central Eletronica
 
@@ -12,9 +15,12 @@ const float clock = 3; //Constante multiplicadora para corrigir o atraso do Tink
 
 float hLeve; //Altura Inicial Fronta, Altura Inicial Traseira
 float hcarregado; //Altura Medida Frontal, Altura Medida Traseira
-float dif; //Diferença Frontal, Diferença Traseira, Difença F-T
+
+
 float lh, enex; // Altura Padrão do Faról em ralação ao chão, Entre Eixos 
 float teta, alpha, gama; //Anulo de correção
+
+int razaoRegulagem = 360; //Razão do giro do motor pelo modificação do angulo do farol
 
 bool estado; //Para guardar o estado do Slave
 int k, comand; //k para mostrar no lcd e comand para executar as configurações
@@ -57,6 +63,9 @@ void setup(){
   lh = 1;
   enex = 3.79;
 
+  EEPROM.update(address, hLeve); //Atualiza o valor na EEPROM
+  hLeve = EEPROM.read(address); //Le valor salvo na EEPROM
+
   digitalWrite(8,HIGH);
 }
 
@@ -85,17 +94,18 @@ void loop() {
     lcd.print("Definido");
     lcd.setCursor(2,1);
     lcd.print("Altura Vazio");
-    delay(20*clock);
+    delay(2000);
     lcd.clear();
 
     leituraT();
     hLeve = distanceT;
+    EEPROM.update(address, hLeve); //Atualiza o valor na EEPROM
 
     lcd.setCursor(0,0);
     lcd.print("H padrao traseiro");
     lcd.setCursor(0,1);
     lcd.print(hLeve);
-    delay(50*clock);
+    delay(2000);
     lcd.clear();
 
     Serial.println("As distancias definidas como padrao foram: ");
@@ -106,6 +116,17 @@ void loop() {
   }
 
   else if (recive == "Altura do Farol " || comand == 2) {
+    while (!Serial.available){
+      lcd.setCursor(3,0);
+      lcd.print("Entre com");
+      lcd.setCursor(4,1);
+      lcd.print("Valores");
+      delay(2000);
+      lcd.clear()
+      Serial.println("Entre com valores:");
+      Serial.println("");
+    }
+    
     if(Serial.available()){  //Verifica a chegada de algo pela serial
       lh = Serial.read();
 
@@ -113,18 +134,31 @@ void loop() {
       lcd.print("H Farol");
       lcd.setCursor(4,1);
       lcd.print(lh);
+      delay(2000);
+      lcd.clear();
 
       Serial.println("Recebemos o valor de:");
       Serial.println(lh);
       recive = "";
       Serial.println("");
 
-      delay(50*clock);
-      lcd.clear();
     }
   }
 
   else if (recive == "Entre Eixos " || comand == 3) {
+    while (!Serial.available)
+    {
+      lcd.setCursor(3,0);
+      lcd.print("Entre com");
+      lcd.setCursor(4,1);
+      lcd.print("Valores");
+      delay(2000);
+      lcd.clear();
+
+      Serial.println("Entre com valores:");
+      Serial.println("");
+    }
+    
     if(Serial.available()){  //Verifica a chegada de algo pela serial
       enex = Serial.read();
 
@@ -132,14 +166,13 @@ void loop() {
       lcd.print("Entre Eixo");
       lcd.setCursor(4,1);
       lcd.print(enex);
+      delay(2000);
+      lcd.clear();
 
       Serial.println("Recebemos o valor de:");
       Serial.println(enex);
       recive = "";
       Serial.println("");
-
-      delay(50*clock);
-      lcd.clear();
     }
   }
 
@@ -150,7 +183,7 @@ void loop() {
     lcd.print("Iniciando");
     lcd.setCursor(2,1);
     lcd.print("Calibracao");
-    delay(20*clock);
+    delay(2000);
     lcd.clear();
 
     leituraT();
@@ -174,21 +207,21 @@ void loop() {
     lcd.print("Compressao t de");
     lcd.setCursor(0,1);
     lcd.print(dif);
-    delay(50*clock);
+    delay(2000);
     lcd.clear();
 
     lcd.setCursor(0,0);
     lcd.print("Angulo Gama");
     lcd.setCursor(0,1);
     lcd.print(gama);
-    delay(50*clock);
+    delay(2000);
     lcd.clear();
 
     lcd.setCursor(1,0);
     lcd.print("Giro no motor");
     lcd.setCursor(0,1);
-    lcd.print(gama*360);
-    delay(50*clock);
+    lcd.print(gama*razaoRegulagem);
+    delay(2000);
     lcd.clear();
 
     lcd.setCursor(3, 0);
@@ -203,10 +236,11 @@ void loop() {
     Serial.println("Zerando Valores");
     Serial.println(""); 
 
+    EEPROM.update(address, 0); //Atualiza o valor na EEPROM
     hLeve = 0;
 
     lcd.print("Valores Zerados");
-    delay(50*clock);
+    delay(2000);
     lcd.clear();
 
     recive = "";
@@ -217,7 +251,7 @@ void loop() {
     lcd.print("ligar/desligar");
     lcd.setCursor(5,1);
     lcd.print("slave");
-    delay(200*clock);
+    delay(2000);
     lcd.clear();    
 
     if(digitalRead(10) == 1){
@@ -234,7 +268,7 @@ void loop() {
       lcd.print("Ligando");
       lcd.setCursor(5,1);
       lcd.print("Slave");
-      delay(200*clock);
+      delay(2000);
       lcd.clear();
     }
 
@@ -247,7 +281,7 @@ void loop() {
       lcd.print("Desligando");
       lcd.setCursor(5,1);
       lcd.print("Slave");
-      delay(200*clock);
+      delay(2000);
       lcd.clear();      
     }
 
@@ -301,19 +335,23 @@ void loop() {
       break;
 
       case 6:
-        lcd.setCursor(0,0);
-        lcd.print("Compressao t de");
-        lcd.setCursor(0,1);
-        lcd.print(dif);
-        delay(200*clock);
-        lcd.clear();
+        if (k == 6){
+          lcd.setCursor(0,0);
+          lcd.print("Compressao t de");
+          lcd.setCursor(0,1);
+          lcd.print(dif);
+          delay(200*clock);
+          lcd.clear();
+        }
 
-        lcd.setCursor(0,0);
-        lcd.print("Angulo Gama");
-        lcd.setCursor(0,1);
-        lcd.print(gama);
-        delay(200*clock);
-        lcd.clear();
+        if (k == 6 ){
+          lcd.setCursor(0,0);
+          lcd.print("Angulo Gama");
+          lcd.setCursor(0,1);
+          lcd.print(gama);
+          delay(200*clock);
+          lcd.clear();
+        }
       break;
 
       case 7:
