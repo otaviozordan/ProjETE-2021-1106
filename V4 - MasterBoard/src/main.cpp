@@ -1,9 +1,8 @@
 //Projeto: V4 - Projete
 //Autor Inicial: Otávio Zordan
 
-
-#include <LiquidCrystal.h> //Adiciona a biblioteca "LiquidCrystal" ao projeto
 #include <EEPROM.h>
+#include <LiquidCrystal.h> //Adiciona a biblioteca "LiquidCrystal" ao projeto
 
 LiquidCrystal lcd(12, 11, 5, 4, 3, 2); // Pinagem do LCD
 
@@ -198,7 +197,7 @@ void loop() {
 
     digitalWrite(9, HIGH);
     delay(5);
-    Serial.println(gama);
+    Serial.println(gama*razaoRegulagem);
     delay(5);
     digitalWrite(9, LOW);
 
@@ -340,7 +339,7 @@ void loop() {
           lcd.print("Compressao t de");
           lcd.setCursor(0,1);
           lcd.print(dif);
-          delay(200*clock);
+          delay(2000);
           lcd.clear();
         }
 
@@ -349,7 +348,7 @@ void loop() {
           lcd.print("Angulo Gama");
           lcd.setCursor(0,1);
           lcd.print(gama);
-          delay(200*clock);
+          delay(2000);
           lcd.clear();
         }
       break;
