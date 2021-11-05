@@ -1,6 +1,7 @@
 //Projeto: V4 - Projete
 //Autor Inicial: Otávio Zordan
 
+#include <Arduino.h>
 #include <EEPROM.h>
 #include <LiquidCrystal.h> //Adiciona a biblioteca "LiquidCrystal" ao projeto
 
