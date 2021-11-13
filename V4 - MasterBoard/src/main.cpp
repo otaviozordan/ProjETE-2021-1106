@@ -17,7 +17,7 @@ float hLeve; //Altura Inicial Fronta, Altura Inicial Traseira
 float hcarregado; //Altura Medida Frontal, Altura Medida Traseira
 
 
-float lh, enex; // Altura Padrão do Faról em ralação ao chão, Entre Eixos 
+float lh, enex, dif; // Altura Padrão do Faról em ralação ao chão, Entre Eixos 
 float teta, alpha, gama; //Anulo de correção
 
 int razaoRegulagem = 360; //Razão do giro do motor pelo modificação do angulo do farol
@@ -60,13 +60,14 @@ void setup(){
   lcd.begin(16, 2); // Inicia o lcd de 16x2
 
   hLeve = 15; 
-  lh = 1;
-  enex = 3.79;
+  lh = 7.50;
+  enex = 15.50;
 
   EEPROM.update(address, hLeve); //Atualiza o valor na EEPROM
   hLeve = EEPROM.read(address); //Le valor salvo na EEPROM
 
   digitalWrite(8,HIGH);
+  estado = true;
 }
 
 void loop() {
@@ -77,6 +78,7 @@ void loop() {
   if(digitalRead(10) ==1){ //Controle de menu
     comand = k ;
     Serial.println("Selecionado funcao");
+    
     Serial.print(comand);
     Serial.println("");
   }
@@ -116,20 +118,21 @@ void loop() {
   }
 
   else if (recive == "Altura do Farol " || comand == 2) {
-    while (!Serial.available){
+    while (!Serial.available()){
       lcd.setCursor(3,0);
       lcd.print("Entre com");
       lcd.setCursor(4,1);
       lcd.print("Valores");
       delay(2000);
-      lcd.clear()
+      lcd.clear();
       Serial.println("Entre com valores:");
       Serial.println("");
     }
     
     if(Serial.available()){  //Verifica a chegada de algo pela serial
       lh = Serial.read();
-
+      Serial.println(lh);
+      
       lcd.setCursor(5,0);
       lcd.print("H Farol");
       lcd.setCursor(4,1);
@@ -146,7 +149,7 @@ void loop() {
   }
 
   else if (recive == "Entre Eixos " || comand == 3) {
-    while (!Serial.available)
+    while (!Serial.available());
     {
       lcd.setCursor(3,0);
       lcd.print("Entre com");
@@ -246,7 +249,7 @@ void loop() {
     recive = "";
   }
 
-  else if(recive == "Estado do Slave" || comand == 7){  
+  else if(recive == "Estado do Slave" || comand == 6){  
     lcd.setCursor(0,0);
     lcd.print("ligar/desligar");
     lcd.setCursor(5,1);
@@ -334,8 +337,8 @@ void loop() {
         lcd.clear();  
       break;
 
-      case 6:
-        if (k == 6){
+      case 7:
+        if (k == 7){
           lcd.setCursor(0,0);
           lcd.print("Compressao t de");
           lcd.setCursor(0,1);
@@ -344,7 +347,7 @@ void loop() {
           lcd.clear();
         }
 
-        if (k == 6 ){
+        if (k == 7){
           lcd.setCursor(0,0);
           lcd.print("Angulo Gama");
           lcd.setCursor(0,1);
@@ -354,7 +357,7 @@ void loop() {
         }
       break;
 
-      case 7:
+      case 6:
         lcd.setCursor(0,0);
         lcd.print("Estado do Slave");
         lcd.setCursor(0,1);
